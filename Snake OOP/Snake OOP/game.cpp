@@ -13,7 +13,8 @@ The functions are:
 
 Initialize()
 OnTimer()
-OnKeyDown()e
+OnKeyDown()
+
 
 The file shows you how to draw rectangles with specific colors and how to draw text if you need to.
 You should not need anything else because we are looking to create a visually-simple Snake game, so flat squared should be good enough.
@@ -72,10 +73,9 @@ namespace game
 	static int foodRandomizing;
 	std::vector<POINT> pointbody;
 	std::queue<Direction> moves;
-	//COLORREF snakeColor = RGB(255,100,0);
-	
-	
 	Direction dir;
+	//COLORREF snakeColor = RGB(255,100,0);
+
 	
 	// This is called when the application is launched.
 	bool Initialize(HWND hWnd)
@@ -86,13 +86,10 @@ namespace game
 		windowHeight = rClient.bottom - rClient.top;
 		gameover = false;
 		pointbody.clear();
-		
 		dir = stop;
 		score = 0;
 		foodRandomizing = windowWidth/size;
 		srand (time(NULL));
-		 
-	
 		OutputDebugStringA("My game has been initialized. This text should be shown in the 'output' window in VS");
 	
 		

@@ -77,9 +77,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="GameOOP.cpp" />
     <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="SnakeOOP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Snake.h" />
   </ItemGroup>
