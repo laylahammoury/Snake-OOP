@@ -40,7 +40,7 @@ Game::Game(){
 
 void Game::eatFood(){
 	
-	const POINT head = snake.getHead();
+	const POINT &head = snake.getHead();
 	if (food.x == head.x && food.y == head.y)
 		{
 			food.x  = (rand()% windowWidth/snake.getSize()) * snake.getSize();
@@ -80,9 +80,9 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 
 void Game::checkGameover ( HWND hWnd)
 	{
-		const std::vector<POINT> snakeBody = snake.getSnakeBody();
-		const POINT headToBe = snake.getHeadToBe();
-		const POINT head = snake.getHead();
+		const std::vector<POINT>& snakeBody = snake.getSnakeBody();
+		const POINT& headToBe = snake.getHeadToBe();
+		const POINT& head = snake.getHead();
 		for (int i = 1; i < snakeBody.size()-1; i++)
 		{
 			if(headToBe.x ==  snakeBody[i].x && headToBe.y == snakeBody[i].y)
