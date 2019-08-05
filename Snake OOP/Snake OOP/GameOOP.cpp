@@ -19,8 +19,9 @@ Game::Game(){
 
 
 void Game::eatFood(){
-	const std::vector<POINT> snakeBody = snake.getSnakeBody();
-	if (food.x == snakeBody[0].x && food.y == snakeBody[0].y)
+	
+	const POINT head = snake.getHead();
+	if (food.x == head.x && food.y == head.y)
 		{
 			food.x  = (rand()% windowWidth/snake.getSize()) * snake.getSize();
 			food.y  = (rand() % windowWidth/snake.getSize()) * snake.getSize();
@@ -51,10 +52,11 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 void Game::checkGameover ( HWND hWnd)
 	{
 		const std::vector<POINT> snakeBody = snake.getSnakeBody();
-		const POINT head = snake.getHeadToBe();
+		const POINT headToBe = snake.getHeadToBe();
+		const POINT head = snake.getHead();
 		for (int i = 1; i < snakeBody.size()-1; i++)
 		{
-			if(head.x ==  snakeBody[i].x && head.y == snakeBody[i].y)
+			if(headToBe.x ==  snakeBody[i].x && headToBe.y == snakeBody[i].y)
 				{
 					gameover = true;
 					MessageBox(0,TEXT("You ate yourself :P "), TEXT("GAMEOVER !!!!"), MB_OK);
@@ -63,7 +65,7 @@ void Game::checkGameover ( HWND hWnd)
 			
 		}
 		
-		if( (snakeBody[0].y + snake.getSize()) > windowWidth ||  snakeBody[0].y  < 0 ||  (snakeBody[0].x + snake.getSize()) > windowHeight ||  snakeBody[0].x  < 0)//Gameover states
+		if( (head.y + snake.getSize()) > windowWidth ||  head.y  < 0 ||  (head.x + snake.getSize()) > windowHeight ||  head.x  < 0)//Gameover states
 			{
 				gameover = true;
 				MessageBox(0,TEXT("Try again :O "), TEXT("GAMEOVER !!!!"), MB_OK);
