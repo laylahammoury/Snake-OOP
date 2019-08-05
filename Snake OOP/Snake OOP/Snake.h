@@ -17,20 +17,20 @@ class Snake{
 		int size ;
 		int padding ;
 		std::vector<POINT> body;
-		POINT tail , head ;	//temporary POINTS used for movement
+		POINT tail , headToBe ;	//temporary POINTS used for movement
 		
 	public:
 		Snake( int square_size = 20);
 		void MoveSnake( Direction direction);
 		void increaseSnake();
 		void killSnake();
-		std::vector<POINT> getSnakeBody();
-		const std::vector<POINT>& getBody() const { return body; }
-
+		const std::vector<POINT>& getSnakeBody()const {return body; }// constant function and returns const vector of points
+		/*
 		const std::vector<POINT>& snakeBody = snake.getBody();
-		snakeBody.push_back();
-
-		int getSize() const;
-		int getPadding() const;
+		*/
+		int getSize() const { return size;}// constant function
+		int getPadding() const {return padding ;}// constant function
+		POINT getHead() const {return body[0] ;}// constant function
+		POINT getHeadToBe() const {return headToBe;}// constant function
 
 };

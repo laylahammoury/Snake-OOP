@@ -13,19 +13,17 @@ void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
 
 
 Game::Game(){
-	snakeBody = snake.getSnakeBody();
-	snakeSize = snake.getSize();
-	snakePadding = snake.getPadding();
+	
 }
 
 
 
 void Game::eatFood(){
-	
+	const std::vector<POINT> snakeBody = snake.getSnakeBody();
 	if (food.x == snakeBody[0].x && food.y == snakeBody[0].y)
 		{
-			food.x  = (rand()% foodRandomizing )* snakeSize;
-			food.y  = (rand() % foodRandomizing )* snakeSize;
+			food.x  = (rand()% windowWidth/snake.getSize()) * snake.getSize();
+			food.y  = (rand() % windowWidth/snake.getSize()) * snake.getSize();
 			snake.increaseSnake();
 			score += 10; 
 			
@@ -39,8 +37,8 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 			{
 				temp.top = Snakbody[i].x ;
 				temp.left = Snakbody[i].y ;
-				temp.bottom = temp.top + (snakeSize-snakePadding);
-				temp.right = temp.left + (snakeSize-snakePadding);
+				temp.bottom = temp.top + (snake.getSize() - snake.getPadding());
+				temp.right = temp.left + (snake.getSize() - snake.getPadding());
 				if(green > 105)
 					green-=15;
 				if (i == 0)
@@ -52,7 +50,8 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 
 void Game::checkGameover ( HWND hWnd)
 	{
-
+		const std::vector<POINT> snakeBody = snake.getSnakeBody();
+		const POINT head = snake.getHeadToBe();
 		for (int i = 1; i < snakeBody.size()-1; i++)
 		{
 			if(head.x ==  snakeBody[i].x && head.y == snakeBody[i].y)
@@ -64,7 +63,7 @@ void Game::checkGameover ( HWND hWnd)
 			
 		}
 		
-		if( (snakeBody[0].y + snakeSize) > windowWidth ||  snakeBody[0].y  < 0 ||  (snakeBody[0].x + snakeSize) > windowHeight ||  snakeBody[0].x  < 0)//Gameover states
+		if( (snakeBody[0].y + snake.getSize()) > windowWidth ||  snakeBody[0].y  < 0 ||  (snakeBody[0].x + snake.getSize()) > windowHeight ||  snakeBody[0].x  < 0)//Gameover states
 			{
 				gameover = true;
 				MessageBox(0,TEXT("Try again :O "), TEXT("GAMEOVER !!!!"), MB_OK);

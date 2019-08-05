@@ -34,11 +34,11 @@ void Snake::MoveSnake( Direction direction){
 
 		}
 		
-		head.x = newTop;
-		head.y = newLeft;
+		headToBe.x = newTop;
+		headToBe.y = newLeft;
 	
 		if (direction != stop){
-			body.insert(body.begin(), head);
+			body.insert(body.begin(), headToBe);
 			tail = body[body.size()-1];
 			body.erase(body.end()-1);
 	
@@ -50,17 +50,4 @@ void Snake::increaseSnake(){
 
 void Snake::killSnake(){
 	body.clear();
-}
-
-//getters
-std::vector<POINT> Snake::getSnakeBody(){
-	return body;
-
-}
-
-int Snake::getSize(){
-	return size;
-}
-int Snake::getPadding(){
-	return padding;
 }
