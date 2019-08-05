@@ -14,18 +14,23 @@ enum Direction{up, down, left, right, stop};
 class Snake{
 
 	private:
-		static int size ;
+		int size ;
 		int padding ;
-		std::vector<POINT> pointbody;
-		static POINT tail , head ;	//temporary POINTS used for movement
+		std::vector<POINT> body;
+		POINT tail , head ;	//temporary POINTS used for movement
 		
 	public:
-		Snake();
+		Snake( int square_size = 20);
 		void MoveSnake( Direction direction);
 		void increaseSnake();
 		void killSnake();
 		std::vector<POINT> getSnakeBody();
-		int getSize();
-		int getPadding();
+		const std::vector<POINT>& getBody() const { return body; }
+
+		const std::vector<POINT>& snakeBody = snake.getBody();
+		snakeBody.push_back();
+
+		int getSize() const;
+		int getPadding() const;
 
 };

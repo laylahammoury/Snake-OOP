@@ -11,17 +11,14 @@ class Game{
 		int score;
 		POINT food;
 		std::queue<Direction> moves;
-		static int foodRandomizing;
 		unsigned int windowWidth;
 		unsigned int windowHeight;
-		std::vector<POINT> snakeBody;
-		int snakeSize  , snakePadding;
 	public:
 		Game();
 		void DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC);
 		void eatFood();
 		bool Initialize(HWND hWnd);
 		bool OnKeyDown(WPARAM keyCode);
-
-
+		void CALLBACK OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime);
+		void checkGameover ( HWND hWnd);
 };

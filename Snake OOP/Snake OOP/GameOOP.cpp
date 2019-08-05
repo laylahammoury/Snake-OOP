@@ -49,3 +49,25 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 					FillRect(hDC, &temp, RGB(50, green, 50)); //Draw a green square.
 			}
 	}
+
+void Game::checkGameover ( HWND hWnd)
+	{
+
+		for (int i = 1; i < snakeBody.size()-1; i++)
+		{
+			if(head.x ==  snakeBody[i].x && head.y == snakeBody[i].y)
+				{
+					gameover = true;
+					MessageBox(0,TEXT("You ate yourself :P "), TEXT("GAMEOVER !!!!"), MB_OK);
+					Initialize(hWnd);
+				}
+			
+		}
+		
+		if( (snakeBody[0].y + snakeSize) > windowWidth ||  snakeBody[0].y  < 0 ||  (snakeBody[0].x + snakeSize) > windowHeight ||  snakeBody[0].x  < 0)//Gameover states
+			{
+				gameover = true;
+				MessageBox(0,TEXT("Try again :O "), TEXT("GAMEOVER !!!!"), MB_OK);
+				Initialize(hWnd);
+			}
+	}
