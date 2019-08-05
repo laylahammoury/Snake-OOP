@@ -12,9 +12,9 @@ void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF 
 //}
 
 
-Game::Game(){
-	
-}
+Game::Game(Snake s){
+	snake= s;
+	 }
 // This is called when the application is launched.
 	bool Game::Initialize(HWND hWnd)
 	{
