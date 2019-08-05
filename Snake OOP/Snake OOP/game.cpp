@@ -138,3 +138,32 @@ void CALLBACK Game::OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime)
 	
 	}//end of OnTimer
 
+// This is called when the user presses a key on the keyboard.
+	// Use this to change the direction of your snake.
+bool Game::OnKeyDown(WPARAM keyCode)
+{
+		
+	if (keyCode == VK_UP && dir !=Direction::down)
+			{
+				dir = up;	
+				moves.push(dir);
+			}
+	else if (keyCode == VK_DOWN && dir !=up)
+			{
+				dir = down;
+				moves.push(dir);
+			}
+		else if ( keyCode == VK_LEFT && dir !=right && dir !=stop)
+			{
+				dir = left;
+				moves.push(dir);
+			}
+			else if( keyCode == VK_RIGHT && dir!=left)
+			{
+				dir = right;
+				moves.push(dir);
+			}
+			
+		
+	return false; // They key pressed does not interest us. Let the OS handle it.
+}
