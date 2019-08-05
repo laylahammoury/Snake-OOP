@@ -17,6 +17,7 @@ class Game{
 		
 	public:
 		Game();
+		Game(Snake s);
 		void DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC);
 		void DrawFood(POINT food , HDC hDC);
 		void eatFood();

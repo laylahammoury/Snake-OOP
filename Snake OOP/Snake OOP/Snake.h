@@ -20,7 +20,8 @@ class Snake{
 		POINT tail , headToBe ;	//temporary POINTS used for movement
 		
 	public:
-		Snake( int square_size = 20);
+		
+		Snake( int square_size = 20 , int square_padding = 2);
 		void MoveSnake( Direction direction);
 		void increaseSnake();
 		void killSnake();

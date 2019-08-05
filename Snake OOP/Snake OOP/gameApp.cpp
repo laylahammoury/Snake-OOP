@@ -5,8 +5,9 @@
 # include <vector>
 # include <string>
 # include<ColorDlg.h>
+#include<iostream>
 #include "Game.h"
-
+using namespace std;
 /*
 Welcome to the Snake game programming challenge. You are required to add code to the following three functions to implement the Snake game.
 You can of course write any code that you need to outside of these functions as well.
@@ -63,36 +64,45 @@ void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF 
 
 namespace game
 {
+	Snake snake =  Snake(20 , 2);
+	Game gamePlay = Game(snake);
+// This is called when the application is launched.
+bool Initialize(HWND hWnd )
+	{
+		cout<<"init has been calld"<<endl;
+		gamePlay.Initialize(hWnd);
+		return true;
+
+	}
+
+// This is called periodically. Use it to update your game state and draw to the window.
+	void CALLBACK OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime )
+	{
+		gamePlay.OnTimer( hWnd,  Msg,  idTimer,  dwTime);
+	}
+
+	// This is called when the user presses a key on the keyboard.
+	// Use this to change the direction of your snake.
+	bool OnKeyDown(WPARAM keyCode )
+	{
+		gamePlay.OnKeyDown( keyCode);
+		return true;
+	}
 	int main()
 	{
-		Snake snake =  Snake(20 , 2);
-		Game gamePlay = Game(snake);
+		
+		//cout<<"main has been called"<<endl;
+		/*Snake snake =  Snake(20 , 2);
+		gamePlay = Game(snake);*/
+		HWND hWnd;
+		Initialize(hWnd );
+		UINT Msg ; UINT_PTR idTimer ; DWORD dwTime; 
+		OnTimer(hWnd , Msg , idTimer , dwTime );
+		WPARAM keyCode;
+		OnKeyDown(keyCode );	
+		
 		
 	
-		// This is called when the application is launched.	
-		
-		bool Initialize(HWND hWnd)
-		{
-			gamePlay.Initialize(hWnd);
-		}
-	
-		
-	
-		// This is called periodically. Use it to update your game state and draw to the window.
-		void CALLBACK OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime)
-		{
-			gamePlay.OnTimer( hWnd,  Msg,  idTimer,  dwTime);
-			
-		}
-
-
-		// This is called when the user presses a key on the keyboard.
-		// Use this to change the direction of your snake.
-		bool OnKeyDown(WPARAM keyCode)
-		{
-			gameplay.OnKeyDown( keyCode);
-		}
-
 	return 0;
 	}//end of main
 }//end of namespace game

@@ -11,7 +11,7 @@ void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF 
 //	SetBkColor(hDC, oldColor);
 //}
 
-
+Game::Game(){snake = NULL;}
 Game::Game(Snake s){
 	snake= s;
 	 }
@@ -54,8 +54,8 @@ void Game::DrawFood(POINT food ,HDC hDC){
 	RECT foodTemp;
 		foodTemp.top = food.x ;
 		foodTemp.left = food.y ;
-		foodTemp.bottom = foodTemp.top + (snake.getSize - snake.getPadding());
-		foodTemp.right= foodTemp.left+ (snake.getSize - snake.getPadding());
+		foodTemp.bottom = foodTemp.top + (snake.getSize() - snake.getPadding());
+		foodTemp.right= foodTemp.left+ (snake.getSize() - snake.getPadding());
 		FillRect(hDC, &foodTemp, RGB(255, 255, 77)); //Draw a food square.
 
 }

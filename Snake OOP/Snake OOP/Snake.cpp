@@ -4,10 +4,9 @@
 
 //int Snake::size = 20;
 
-Snake::Snake( int square_size){
-	//*this.size = 20;
+Snake::Snake( int square_size , int square_padding){
 	size = square_size;
-	padding = 2;
+	padding = square_padding;
 }
 
 void Snake::MoveSnake( Direction direction){
