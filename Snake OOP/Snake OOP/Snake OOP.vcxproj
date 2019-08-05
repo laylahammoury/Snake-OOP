@@ -76,8 +76,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameOOP.cpp" />
+    <ClCompile Include="gameApp.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="SnakeApp.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
