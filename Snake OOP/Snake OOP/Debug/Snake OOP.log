@@ -1,21 +1,20 @@
-﻿Build started 05-Aug-19 9:26:15 AM.
+﻿Build started 05-Aug-19 2:03:11 PM.
      1>Project "C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Snake OOP.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Users\H\Documents\visualstudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt GameOOP.cpp Snake.cpp SnakeOOP.cpp
-         Snake.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         SnakeOOP.cpp
-         GameOOP.cpp
+         C:\Users\H\Documents\visualstudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
+     1>c:\users\h\documents\asal training 2019\snake-oop\snake oop\snake oop\game.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\h\documents\asal training 2019\snake-oop\snake oop\snake oop\game.cpp(68): warning C4018: '>' : signed/unsigned mismatch
        Link:
          C:\Users\H\Documents\visualstudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Debug\Snake OOP.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Debug\Snake OOP.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Debug\Snake OOP.lib" /MACHINE:X86 Debug\Snake.res
-         Debug\game.obj
-         Debug\GameOOP.obj
+         Debug\gameApp.obj
+         Debug\Game.obj
+         Debug\SnakeApp.obj
          Debug\Snake.obj
-         Debug\SnakeOOP.obj
-         Snake OOP.vcxproj -> C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Debug\Snake OOP.exe
-     1>Done Building Project "C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Snake OOP.vcxproj" (Build target(s)).
+     1>Game.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Game::Initialize(struct HWND__ *)" (?Initialize@Game@@QAE_NPAUHWND__@@@Z) referenced in function "public: void __thiscall Game::checkGameover(struct HWND__ *)" (?checkGameover@Game@@QAEXPAUHWND__@@@Z)
+     1>C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Debug\Snake OOP.exe : fatal error LNK1120: 1 unresolved externals
+     1>Done Building Project "C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Snake OOP.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.14
+Time Elapsed 00:00:01.74

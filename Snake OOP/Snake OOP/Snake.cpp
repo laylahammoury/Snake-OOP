@@ -51,3 +51,17 @@ void Snake::increaseSnake(){
 void Snake::killSnake(){
 	body.clear();
 }
+void Snake::initSquares(int windowHeight , int windowWidth){
+
+	POINT initArray[3];
+		int initX = windowWidth /2;
+		int initY = windowHeight/2;
+
+		for (int i = 0; i < 3; i++)
+		{
+			initArray[i].x = initX ;
+			initArray[i].y = initY - (i * size);
+			body.push_back(initArray[i]);
+		}
+
+}

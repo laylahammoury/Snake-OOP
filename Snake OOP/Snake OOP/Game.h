@@ -10,15 +10,18 @@ class Game{
 		bool gameover;
 		int score;
 		POINT food;
+		Direction dir;
 		std::queue<Direction> moves;
 		unsigned int windowWidth;
 		unsigned int windowHeight;
+		
 	public:
 		Game();
 		void DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC);
 		void eatFood();
+		void checkGameover ( HWND hWnd);
 		bool Initialize(HWND hWnd);
 		bool OnKeyDown(WPARAM keyCode);
 		void CALLBACK OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime);
-		void checkGameover ( HWND hWnd);
+		
 };

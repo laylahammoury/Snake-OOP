@@ -32,5 +32,6 @@ class Snake{
 		int getPadding() const {return padding ;}// constant function
 		POINT getHead() const {return body[0] ;}// constant function
 		POINT getHeadToBe() const {return headToBe;}// constant function
+		void initSquares(int windowHeight , int windowWidth);
 
 };

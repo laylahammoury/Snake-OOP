@@ -4,18 +4,38 @@
 void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF clr);
 
 // Use this to fill a rectangle of the hDC with a specific color.
-void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
-{
-	COLORREF oldColor = SetBkColor(hDC, color);
-	ExtTextOut(hDC, 0, 0, ETO_OPAQUE, pRect, TEXT(""), 0, 0);
-	SetBkColor(hDC, oldColor);
-}
+//void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
+//{
+//	COLORREF oldColor = SetBkColor(hDC, color);
+//	ExtTextOut(hDC, 0, 0, ETO_OPAQUE, pRect, TEXT(""), 0, 0);
+//	SetBkColor(hDC, oldColor);
+//}
 
 
 Game::Game(){
 	
 }
+// This is called when the application is launched.
+	bool Game::Initialize(HWND hWnd)
+	{
+		RECT rClient;
+		GetClientRect(hWnd, &rClient);
+		windowWidth = rClient.right - rClient.left; // rClient.top and rClient.left are always 0.
+		windowHeight = rClient.bottom - rClient.top;
+		gameover = false;
+		snake.killSnake();//used to initialize the snake
+		dir = stop;
+		score = 0;
+		srand (time(NULL));
+		OutputDebugStringA("My game has been initialized. This text should be shown in the 'output' window in VS");
+		snake.initSquares(windowHeight , windowWidth);//fill the snake to start with 3 squares
 
+		//initialize the food place
+		food.x = snake.getHead().x ;
+		food.y = snake.getHead().y + (2 * snake.getSize());
+
+		return true;
+	}
 
 
 void Game::eatFood(){
@@ -72,3 +92,4 @@ void Game::checkGameover ( HWND hWnd)
 				Initialize(hWnd);
 			}
 	}
+
