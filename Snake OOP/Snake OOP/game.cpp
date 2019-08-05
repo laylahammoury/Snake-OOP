@@ -50,6 +50,15 @@ void Game::eatFood(){
 			
 		} 
 }
+void Game::DrawFood(POINT food ,HDC hDC){
+	RECT foodTemp;
+		foodTemp.top = food.x ;
+		foodTemp.left = food.y ;
+		foodTemp.bottom = foodTemp.top + (snake.getSize - snake.getPadding());
+		foodTemp.right= foodTemp.left+ (snake.getSize - snake.getPadding());
+		FillRect(hDC, &foodTemp, RGB(255, 255, 77)); //Draw a food square.
+
+}
 void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 	{
 		RECT temp ;
@@ -92,4 +101,40 @@ void Game::checkGameover ( HWND hWnd)
 				Initialize(hWnd);
 			}
 	}
+void CALLBACK Game::OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime)
+	{
+		
+		HDC hDC = GetDC(hWnd);
+		RECT rClient;
+		GetClientRect(hWnd, &rClient);
+		FillRect(hDC, &rClient, RGB(0, 0, 0)); // Clear the window to blackness.
+		char text[256] = { 0 };
+		sprintf_s(text, " Score : %d", score);
+		RECT rText = { 0, 0, rClient.right, 15 };
+		DrawTextLine(hWnd, hDC, text, &rText, RGB(120, 120, 120));
+
+		if( moves.size() >=1 )
+		{
+			dir = moves.front();
+			moves.pop();
+		}
+		
+		
+		if ( gameover )
+		{
+			DrawSnake(snake.getSnakeBody(), hDC);//to draw it and see how you died
+			return ;
+		}
+
+		snake.MoveSnake( dir);
+		eatFood();
+		
+		DrawFood(food , hDC);
+		
+
+		DrawSnake(snake.getSnakeBody() , hDC);
+		checkGameover ( hWnd);
+
+	
+	}//end of OnTimer
 
