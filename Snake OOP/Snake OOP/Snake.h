@@ -18,13 +18,14 @@ class Snake{
 		int padding ;
 		std::vector<POINT> pointbody;
 		static POINT tail , head ;	//temporary POINTS used for movement
-
+		
 	public:
 		Snake();
 		void MoveSnake( Direction direction);
 		void increaseSnake();
 		void killSnake();
-
-	friend class Game;
+		std::vector<POINT> getSnakeBody();
+		int getSize();
+		int getPadding();
 
 };

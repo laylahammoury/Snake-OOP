@@ -48,3 +48,16 @@ void Snake::increaseSnake(){
 void Snake::killSnake(){
 	pointbody.clear();
 }
+
+//getters
+std::vector<POINT> Snake::getSnakeBody(){
+	return pointbody;
+
+}
+
+int Snake::getSize(){
+	return size;
+}
+int Snake::getPadding(){
+	return padding;
+}

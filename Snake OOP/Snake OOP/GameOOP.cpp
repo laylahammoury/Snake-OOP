@@ -1,4 +1,5 @@
 #include "Game.h"
+//#include<vector>
 
 void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF clr);
 
@@ -10,19 +11,27 @@ void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
 	SetBkColor(hDC, oldColor);
 }
 
+
+Game::Game(){
+	snakeBody = snake.getSnakeBody();
+	snakeSize = snake.getSize();
+	snakePadding = snake.getPadding();
+}
+
+
+
 void Game::eatFood(){
-
-
-	if (food.x == pointbody[0].x && food.y == pointbody[0].y)
+	
+	if (food.x == snakeBody[0].x && food.y == snakeBody[0].y)
 		{
-			food.x  = (rand()% foodRandomizing )* size;
-			food.y  = (rand() % foodRandomizing )* size;
+			food.x  = (rand()% foodRandomizing )* snakeSize;
+			food.y  = (rand() % foodRandomizing )* snakeSize;
 			snake.increaseSnake();
 			score += 10; 
 			
 		} 
 }
-void Snake::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
+void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 	{
 		RECT temp ;
 		int green = 255;
@@ -30,8 +39,8 @@ void Snake::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 			{
 				temp.top = Snakbody[i].x ;
 				temp.left = Snakbody[i].y ;
-				temp.bottom = temp.top + (size-padding);
-				temp.right = temp.left + (size-padding);
+				temp.bottom = temp.top + (snakeSize-snakePadding);
+				temp.right = temp.left + (snakeSize-snakePadding);
 				if(green > 105)
 					green-=15;
 				if (i == 0)
