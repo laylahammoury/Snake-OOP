@@ -3,39 +3,28 @@
 
 void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF clr);
 
-// Use this to fill a rectangle of the hDC with a specific color.
-//void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
-//{
-//	COLORREF oldColor = SetBkColor(hDC, color);
-//	ExtTextOut(hDC, 0, 0, ETO_OPAQUE, pRect, TEXT(""), 0, 0);
-//	SetBkColor(hDC, oldColor);
-//}
 
-Game::Game(){snake = NULL;}
-Game::Game(Snake s){
-	snake= s;
-	 }
 // This is called when the application is launched.
-	bool Game::Initialize(HWND hWnd)
-	{
-		RECT rClient;
-		GetClientRect(hWnd, &rClient);
-		windowWidth = rClient.right - rClient.left; // rClient.top and rClient.left are always 0.
-		windowHeight = rClient.bottom - rClient.top;
-		gameover = false;
-		snake.killSnake();//used to initialize the snake
-		dir = stop;
-		score = 0;
-		srand (time(NULL));
-		OutputDebugStringA("My game has been initialized. This text should be shown in the 'output' window in VS");
-		snake.initSquares(windowHeight , windowWidth);//fill the snake to start with 3 squares
+bool Game::Initialize(HWND hWnd)
+{
+	RECT rClient;
+	GetClientRect(hWnd, &rClient);
+	windowWidth = rClient.right - rClient.left; // rClient.top and rClient.left are always 0.
+	windowHeight = rClient.bottom - rClient.top;
+	gameover = false;
+	snake.clearSnake(); //used to initialize the snake
+	dir = stop;
+	score = 0;
+	srand (time(NULL));
+	OutputDebugStringA("My game has been initialized. This text should be shown in the 'output' window in VS");
+	snake.initSquares(windowHeight, windowWidth, 10); //fill the snake to start with given number of  squares
 
-		//initialize the food place
-		food.x = snake.getHead().x ;
-		food.y = snake.getHead().y + (2 * snake.getSize());
+	//initialize the food place
+	food.x = snake.getHead().x ;
+	food.y = snake.getHead().y + (2 * snake.getSize());
 
-		return true;
-	}
+	return true;
+}
 
 
 void Game::eatFood(){
@@ -50,16 +39,18 @@ void Game::eatFood(){
 			
 		} 
 }
-void Game::DrawFood(POINT food ,HDC hDC){
+
+
+void Game::drawFood(POINT food ,HDC hDC){
 	RECT foodTemp;
 		foodTemp.top = food.x ;
 		foodTemp.left = food.y ;
-		foodTemp.bottom = foodTemp.top + (snake.getSize() - snake.getPadding());
-		foodTemp.right= foodTemp.left+ (snake.getSize() - snake.getPadding());
+		foodTemp.bottom = foodTemp.top + (snake.getSize() - PADDING);
+		foodTemp.right= foodTemp.left+ (snake.getSize() - PADDING);
 		FillRect(hDC, &foodTemp, RGB(255, 255, 77)); //Draw a food square.
 
 }
-void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
+void Game::drawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 	{
 		RECT temp ;
 		int green = 255;
@@ -67,8 +58,8 @@ void Game::DrawSnake(const std::vector<POINT>& Snakbody , HDC hDC)
 			{
 				temp.top = Snakbody[i].x ;
 				temp.left = Snakbody[i].y ;
-				temp.bottom = temp.top + (snake.getSize() - snake.getPadding());
-				temp.right = temp.left + (snake.getSize() - snake.getPadding());
+				temp.bottom = temp.top + (snake.getSize() - PADDING);
+				temp.right = temp.left + (snake.getSize() - PADDING);
 				if(green > 105)
 					green-=15;
 				if (i == 0)
@@ -101,9 +92,8 @@ void Game::checkGameover ( HWND hWnd)
 				Initialize(hWnd);
 			}
 	}
-void CALLBACK Game::OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime)
+void Game::OnTimer(HWND hWnd)
 	{
-		
 		HDC hDC = GetDC(hWnd);
 		RECT rClient;
 		GetClientRect(hWnd, &rClient);
@@ -122,17 +112,17 @@ void CALLBACK Game::OnTimer(HWND hWnd, UINT Msg, UINT_PTR idTimer, DWORD dwTime)
 		
 		if ( gameover )
 		{
-			DrawSnake(snake.getSnakeBody(), hDC);//to draw it and see how you died
+			drawSnake(snake.getSnakeBody(), hDC);//to draw it and see how you died
 			return ;
 		}
 
 		snake.MoveSnake( dir);
 		eatFood();
 		
-		DrawFood(food , hDC);
+		drawFood(food , hDC);
 		
 
-		DrawSnake(snake.getSnakeBody() , hDC);
+		drawSnake(snake.getSnakeBody() , hDC);
 		checkGameover ( hWnd);
 
 	

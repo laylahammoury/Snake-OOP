@@ -4,22 +4,21 @@
 #include <windows.h>
 #include "Snake.h"
 #include <string>
+# include "Game.h"
+# include "resource.h"
 
-//There was a function called setTimer and I made it become a comment..
-//From project/properities menu I changed something 
 
-// Game functions - trainees must implement in game.cpp
-namespace game
-{
-	bool Initialize(HWND hWnd);
-	void CALLBACK OnTimer(HWND hWnd, UINT, UINT_PTR, DWORD);
-	bool OnKeyDown(WPARAM keyCode);
-}
+Game snakeGame;
+
+
+void CALLBACK OnTimer(HWND hWnd, UINT, UINT_PTR, DWORD )
+{ snakeGame.OnTimer( hWnd ); }
+
 
 
 /// On the first call, it creates a font identical to what Windows used for GUI. Subsequent
 /// calls return this font.
-inline HFONT GetGuiFont()
+HFONT GetGuiFont()
 {
 	static HFONT hGuiFont = NULL;
 	if (!hGuiFont)
@@ -30,6 +29,15 @@ inline HFONT GetGuiFont()
 		hGuiFont = CreateFontIndirect(&ncm.lfMessageFont);
 	}
 	return hGuiFont;
+}
+
+
+
+void FillRect(HDC hDC, const RECT* pRect, COLORREF color)
+{
+	COLORREF oldColor = SetBkColor(hDC, color);
+	ExtTextOut(hDC, 0, 0, ETO_OPAQUE, pRect, TEXT(""), 0, 0);
+	SetBkColor(hDC, oldColor);
 }
 
 
@@ -158,13 +166,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   if (!game::Initialize(hWnd))
+   if (!snakeGame.Initialize( hWnd ))
    {
 	   MessageBox(hWnd, TEXT("Game initialization failure. Exiting"), TEXT("ERROR"), MB_OK | MB_ICONSTOP);
 	   return FALSE;
    }
 
-   SetTimer(hWnd, GAME_TIMER, 75 , game::OnTimer);
+   SetTimer(hWnd, GAME_TIMER, 75 , OnTimer);
 
    return TRUE;
 }
@@ -212,7 +220,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         PostQuitMessage(0);
         break;
 	case WM_KEYDOWN:
-		if (game::OnKeyDown(wParam))
+		if( snakeGame.OnKeyDown(wParam) )
 			return 0;
 		break;
     default:
