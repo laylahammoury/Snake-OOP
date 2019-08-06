@@ -1,4 +1,4 @@
-﻿Build started 06-Aug-19 1:22:10 PM.
+﻿Build started 06-Aug-19 2:34:09 PM.
      1>Project "C:\Users\H\Documents\Asal training 2019\Snake-OOP\Snake OOP\Snake OOP\Snake OOP.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Users\H\Documents\visualstudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp Snake.cpp SnakeApp.cpp
@@ -22,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.19
+Time Elapsed 00:00:04.15
