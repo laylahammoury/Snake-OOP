@@ -24,9 +24,9 @@ class Snake
 		
 		Snake( int square_size = 20 );
 		void MoveSnake( Direction direction);
-		void increaseSnake();
+		void increaseSnake() { body.push_back(tail); }
 		void clearSnake();
-		const std::vector<POINT>& getSnakeBody()const {return body; } // constant function and returns const vector of points
+		const std::vector<POINT>& getBody()const {return body; } // constant function and returns const vector of points
 		int getSize() const { return size;} // constant function
 		POINT getHead() const { return body[0]; } 
 		POINT getHeadToBe() const {return headToBe;} 

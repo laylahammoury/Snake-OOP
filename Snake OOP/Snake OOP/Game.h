@@ -5,6 +5,10 @@ void DrawTextLine(HWND hWnd, HDC hDC, const char* sText, RECT* prText, COLORREF 
 
 # define PADDING 2
 # define BOX_SIZE 20
+# define INITIAL_LENGTH 20
+
+
+inline const char* get_name() { return "adel"; }
 
 class Game
 {
@@ -21,8 +25,8 @@ public:
 	Game(): snake(BOX_SIZE)
 	{ }
 
-	void drawSnake(const std::vector<POINT>& Snakbody , HDC hDC);
-	void drawFood(POINT food , HDC hDC);
+	void drawSnake(HDC hDC);
+	void drawPoint(POINT food , HDC hDC, COLORREF color);
 	// Checks if head intersects food, if so, generates a new food position and grows the snake.
 	void eatFood();
 	void checkGameover ( HWND hWnd);
